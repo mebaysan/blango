@@ -7,6 +7,14 @@
         <h5>Posted by {{ comment.creator }} at {{ comment.created_at|date:"M, d Y h:i" }}</h5>
     {% endcol %}
 {% endrow %}
+{% if post.author.profile %}
+    {% row %}
+        {% col %}
+            <h4>About the author</h4>
+            <p>{{ post.author.profile.bio }}</p>
+        {% endcol %}
+    {% endrow %}
+{% endif %}
 {% row "border-bottom" %}
     {% col %}
         <p>{{ comment.content }}</p>

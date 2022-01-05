@@ -41,6 +41,7 @@ class Dev(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'blango_auth',
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
@@ -199,6 +200,9 @@ class Dev(Configuration):
 }
     # We need to add this to use DjDt (django debug toolbar) [pay attention!: we need to add our ip]
     INTERNAL_IPS = ["192.168.10.226"]
+
+    # We set a new Used model to use for authentication
+    AUTH_USER_MODEL = "blango_auth.User"
 
 
 class Prod(Dev):
