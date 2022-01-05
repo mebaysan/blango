@@ -2,14 +2,23 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from blog.models import Post
 from blog.forms import CommentForm
+# We use this for logging
 import logging
+# We use this to cache
+#from django.views.decorators.cache import cache_page
+# ## We use this to cache with
+#from django.views.decorators.vary import vary_on_headers
+
 
 logger = logging.getLogger(__name__)
 
+#@cache_page(300) # 300 seconds (5 minutes)
+#@vary_on_headers('Cookie')
 def index(request):
     posts = Post.objects.filter(published_at__lte=timezone.now())
     logger.debug("Got %d posts", len(posts))
     return render(request, "blog/index.html",{'posts':posts})
+
 
 def post_detail(request, slug):
     post = get_object_or_404(Post,slug=slug)
