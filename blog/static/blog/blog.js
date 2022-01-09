@@ -1,18 +1,38 @@
-function sayHello(name) {
-  if (name === undefined) {
-      console.log('Hello, no name')
-  } else {
-       console.log('Hello, ' + name)
+class ClickButton extends React.Component {
+  state = {
+    wasClicked: false
+  }
+
+  handleClick () {
+    this.setState(
+      {wasClicked: true}
+    )
+  }
+
+  render () {
+    let buttonText
+
+    if (this.state.wasClicked)
+      buttonText = 'Clicked!'
+    else
+      buttonText = 'Click Me'
+
+    return React.createElement(
+      'button',
+      {
+        className: 'btn btn-primary mt-2',
+        onClick: () => {
+          this.handleClick()
+        }
+      },
+      buttonText
+    )
   }
 }
 
-const name = 'Baysan'  // Put your name here
+const domContainer = document.getElementById('react_root')
 
-console.log('Before setTimeout')
-
-setTimeout(() => {
-    sayHello(name)
-  }, 2000
+ReactDOM.render(
+  React.createElement(ClickButton),
+  domContainer
 )
-
-console.log('After setTimeout')
