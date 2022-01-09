@@ -9,6 +9,7 @@ import logging
 # ## We use this to cache with
 #from django.views.decorators.vary import vary_on_headers
 
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -47,5 +48,8 @@ def get_ip(request):
   from django.http import HttpResponse
   return HttpResponse(request.META['REMOTE_ADDR'])
 
+
 def post_table(request):
-    return render(request, "blog/post-table.html")
+    return render(
+        request, "blog/post-table.html", {"post_list_url": reverse("post-list")}
+    )
